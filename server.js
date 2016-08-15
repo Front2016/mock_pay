@@ -17,10 +17,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
+const YeePay = require('./routes/YeePay');
 
 //分模块路由
 app.use('/', routes);
 app.use('/users', users);
+app.use('/YeePay',YeePay);
 
 //路由中间件
 app.all('/*', function (req, res, next) {
@@ -45,16 +47,6 @@ app.use(function (err, req, res, next) {
   });
   //res.send(err.message)
 });
-
-// 静态路由
-// router.use('/', function (req, res) {
-//   var filePath = req.path
-//   if (/\.jade$/.test(filePath)) {
-//     var fileName = filePath.replace(/(\/|\.jade)/g, '')
-//     console.log(fileName)
-//     res.render(fileName)
-//   }
-// })
 
 const port = config.port || 3000;
 

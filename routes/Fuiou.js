@@ -1,3 +1,6 @@
+/**
+ * Created by lio on 16/8/14.
+ */
 var express = require('express');
 var router = express.Router();
 var chalk = require('chalk');
@@ -41,7 +44,7 @@ router.get('/', function (req, res, next) {
     if (err) throw err;
     console.log('The envirment',process.env.NODE_ENV);
     console.log('The solution is: ', JSON.stringify(rows));
-    res.render('index', {title: JSON.stringify(rows)});
+    res.render('index', {title: 'Yeepay'});
   });
   //connection.end();
 });

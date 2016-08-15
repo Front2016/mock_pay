@@ -10,9 +10,9 @@
     "dev1": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
   },
   "author": {
-    "name": "kisnows",
-    "email": "yq12315@gmail.com",
-    "url": "https://github.com/kisnows/Express-Gulp-BrowserSync"
+    "name": "yan",
+    "email": "",
+    "url": ""
   },
   "devDependencies": {
     "babel-core": "^6.8.0",
