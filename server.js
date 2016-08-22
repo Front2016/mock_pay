@@ -18,17 +18,33 @@ app.use(express.static(path.join(__dirname, 'public')));
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const YeePay = require('./routes/YeePay');
+const Fuiou = require('./routes/Fuiou');
+const UmPay = require('./routes/UmPay');
+
+//环境设置
+process.env.NODE_ENV = 'develop';
+
+//var chat = require('./model/Chat')(app, express);
+
+//路由中间件
+//添加session初始化
+// app.use(function(req, res, next) {
+//   req.session.views = 'yanhui';
+//   console.log('======session======'+req.session.views);
+//   next();
+// });
 
 //分模块路由
 app.use('/', routes);
 app.use('/users', users);
 app.use('/YeePay',YeePay);
+app.use('/Fuiou',Fuiou);
+app.use('/UmbPay',UmPay);
 
-//路由中间件
-app.all('/*', function (req, res, next) {
-  console.log('Accessing the secret section ...');
-  next(); // pass control to the next handler
-});
+// app.all('/*', function (req, res, next) {
+//   console.log('Accessing the secret section ...');
+//   next(); // pass control to the next handler
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

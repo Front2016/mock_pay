@@ -116,17 +116,43 @@ router.get('/unBindCard', function (req, res, next) {
 
 /*****************************  充值  *******************************/
 
+router.use('/rechargewithsms', function(req, res, next){
+  console.log('提交充值申请');
+  connection.query('SELECT * from right_table', function (err, rows, fields) {
+    if (err) throw err;
+    console.log('The envirment', process.env.NODE_ENV);
+    res.render('index', {title: 'Yeepay-rechargewithsms'});
+  });
+});
 
+router.use('/rechargesendsms', function(req, res, next){
+  console.log('发送充值验证码');
+  connection.query('SELECT * from right_table', function (err, rows, fields) {
+    if (err) throw err;
+    console.log('The envirment', process.env.NODE_ENV);
+    res.render('index', {title: 'Yeepay-rechargesendsms'});
+  });
+});
 
-
-
+router.use('/rechargeconfsms', function(req, res, next){
+  console.log('提交充值验证码');
+  connection.query('SELECT * from right_table', function (err, rows, fields) {
+    if (err) throw err;
+    console.log('The envirment', process.env.NODE_ENV);
+    res.render('index', {title: 'Yeepay-rechargeconfsms'});
+  });
+});
 
 
 /*****************************  提现  *******************************/
 
-
-
-
-
+router.use('/cashconf', function(req, res, next){
+  console.log('提现');
+  connection.query('SELECT * from right_table', function (err, rows, fields) {
+    if (err) throw err;
+    console.log('The envirment', process.env.NODE_ENV);
+    res.render('index', {title: 'Yeepay-cashconf'});
+  });
+})
 
 module.exports = router;
