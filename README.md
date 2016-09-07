@@ -28,3 +28,4 @@ npm run dist
 打包压缩后的文件会存放在 public 文件夹下。
 
 Browser to localhost:5000 ,go dev!
+# mock_pay
