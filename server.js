@@ -6,6 +6,8 @@ const express = require('express');
 
 const config = require('./config');
 const app = express();
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 var viewPath = path.join(__dirname, 'views');
 // view engine setup
@@ -20,6 +22,10 @@ const users = require('./routes/users');
 const YeePay = require('./routes/YeePay');
 const Fuiou = require('./routes/Fuiou');
 const UmPay = require('./routes/UmPay');
+const Login = require('./routes/Login');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //环境设置
 process.env.NODE_ENV = 'develop';
@@ -35,11 +41,12 @@ process.env.NODE_ENV = 'develop';
 // });
 
 //分模块路由
-app.use('/', routes);
+app.use('*', routes);
 app.use('/users', users);
 app.use('/YeePay',YeePay);
 app.use('/Fuiou',Fuiou);
 app.use('/UmbPay',UmPay);
+app.use('/Login',Login);
 
 // app.all('/*', function (req, res, next) {
 //   console.log('Accessing the secret section ...');

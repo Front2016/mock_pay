@@ -8,7 +8,7 @@ var url = require('url');
 var request = require('request');
 var connection = require('../model/DB');
 var httpEngine = require('../model/HttpEngine');
-
+var YeePayBindCard = require('../utils/YeePayBindcard');
 
 //mock
 if (process.env.NODE_ENV === 'development') {
