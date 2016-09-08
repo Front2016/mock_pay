@@ -59,7 +59,7 @@ gulp.task('dev:server', function () {
     files: [filepath.js, filepath.view],
     notify: false,
     open: true,
-    port: 5000
+    port: 3000
   })
 });
 
@@ -83,7 +83,7 @@ gulp.task('api:server', function () {
 });
 
 gulp.task('cssmin', function () {
-  return gulp.src(path.join(publicdir, 'css/main.css'))
+  return gulp.src(path.join(publicdir, './public/css/main.css'))
     .pipe(cssnano())
     .pipe(rename({
       suffix: '.min'
@@ -107,10 +107,16 @@ gulp.task('transJade', function () {
     })).pipe(gulp.dest('./public/dist/html'))
 });
 
+gulp.task('moveScss', function(){
+  return gulp.src('./src/css/*.scss')
+    .pipe(gulp.dest('./public/css'));
+})
+
 
 gulp.task('transScss', function () {
   return gulp.src('./src/css/*.scss')
-    .pipe(sass()).pipe(gulp.dest('./public/dist/css'));
+    .pipe(sass())
+    .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('browser-sync', function () {
@@ -120,7 +126,7 @@ gulp.task('browser-sync', function () {
     }
   });
 
-  gulp.watch('src/sass/**/*.scss', ['sassfile']);
+  gulp.watch('src/sass/**/*.scss', ['transScss']);
   gulp.watch("*.html").on('change', reload);
 });
 
@@ -161,4 +167,6 @@ gulp.task('watch', function () {
 
 gulp.task('dev', ['dev:server', 'css', 'transScss', 'transJade', 'webpack', 'watch']);
 gulp.task('api', ['api:server', 'css', 'watch']);
+
+gulp.task('compile',['webpack','dev:server','transScss']);
 

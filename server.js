@@ -8,11 +8,21 @@ const config = require('./config');
 const app = express();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 var viewPath = path.join(__dirname, 'views');
 // view engine setup
 app.set('views', path.join(viewPath));
 app.set('view engine', 'jade');
+var set={
+  secret: '12345',
+  name: 'testapp',
+  cookie: {maxAge: 80000 },
+  resave: false,
+  saveUninitialized: true}
+  
+app.use(bodyParser.urlencoded({ extended: false }));  
+app.use(session(set));
 
 // 静态资源
 app.use(express.static(path.join(__dirname, 'public')));
@@ -32,16 +42,26 @@ process.env.NODE_ENV = 'develop';
 
 //var chat = require('./model/Chat')(app, express);
 
+// development only  
+// if ('development' == app.get('env')) {  
+//   app.use(express.errorHandler());  
+// } 
+
 //路由中间件
 //添加session初始化
-// app.use(function(req, res, next) {
-//   req.session.views = 'yanhui';
-//   console.log('======session======'+req.session.views);
-//   next();
-// });
+app.use(function(req, res, next) {
+  var urlpath = url.parse(req.url);
+  if(urlpath.pathname.toLowerCase() != '/login/login'){
+    //res.send(urlpath.pathname.toLowerCase());
+    if(!req.session.uid){
+      res.redirect(301,'/Login/login');
+    }
+  }
+  next();
+});
 
 //分模块路由
-app.use('*', routes);
+app.use('/', routes);
 app.use('/users', users);
 app.use('/YeePay',YeePay);
 app.use('/Fuiou',Fuiou);

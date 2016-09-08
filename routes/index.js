@@ -15,9 +15,8 @@ var app = new express();
 // app.use(bodyParser.urlencoded({ extended: true })); 
 // app.use(multer()); 
 
-router.all('*',function(req, res, next){
-    console.log(chalk.red('dev server'));
-    console.log(req.body);
+router.all('/',function(req, res, next){
+    res.render('index');
     next();
 })
 module.exports = router;
