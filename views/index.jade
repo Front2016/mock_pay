@@ -1,13 +1,19 @@
 extends layout/layout
 
+block style
+  style.
+    h1{
+      text-align:center;
+      font-size:60px;
+      margin-top:100px;
+    }
 block content
   div.page-index
-    h1 Welcome
-    ul
-      li 你的微笑-
-      li 是我最美的回忆
-      li 啊
-      li= title
+    h1 首页支付Mocks
 
+    .info
+      p.name 姓名 #{name}
+      p.create_time 创建时间 #{create_time}
 
-script(src="../build/bundle.js")
+    .flex
+      button.btn.btn-success 进入配置

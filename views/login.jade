@@ -1,13 +1,37 @@
 extends layout/layout
 
 block content
-  div.page-index
-    h1 Welcome
-    ul
-      li 你的微笑-
-      li 是我最美的回忆
-      li 啊
-      li= title
+  .page-login
+    h1  登陆
+    .user.flex
+      label 用户名:
+      input(id='user' placeholder='输入用户名')
+    .password.flex
+      label 密码:
+      input(id='password' placeholder='输入密码')
+    .loginflex  
+      .button.btn.btn-info.btn-lg 登陆
+  script(src='/js/index.js')
+  script.
+    $('.button').click(function(){
+      if(true){
+        $.ajax({
+          'url':'/login/submit',
+          'data':{
+            'name': $("#user").val(),
+            'password': $("#password").val()
+          },
+          'dataType':'json',
+          'success':function(data){
+            if(data['res'] == 'success'){
+              location.href = '/'
+            }
+          },
+          'error':function(error){
+            console.log(error)
+          }
+        })
+      }
+    });
 
-
-script(src='/js/index.js')
+    

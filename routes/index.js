@@ -16,7 +16,11 @@ var app = new express();
 // app.use(multer()); 
 
 router.all('/',function(req, res, next){
-    res.render('index');
-    next();
+    var data = {};
+    connection.query('SELECT name,create_time from user where id = "'+req.session.uid+'" ', function (err, rows, fields) {
+        data['name'] = rows[0]['name'];
+        data['create_time'] = rows[0]['create_time'];
+        res.render('index',data);
+    })
 })
 module.exports = router;

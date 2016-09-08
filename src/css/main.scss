@@ -1,5 +1,11 @@
+@import "./utils/bootstrap";
+@import "./utils/login";
+
+//首页
+@import "./widget/index";
+
 body{
-  background-color: red;
+  background-color:#fff;
   div{
     color: black;
   }

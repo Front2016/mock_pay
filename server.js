@@ -51,12 +51,12 @@ process.env.NODE_ENV = 'develop';
 //添加session初始化
 app.use(function(req, res, next) {
   var urlpath = url.parse(req.url);
-  if(urlpath.pathname.toLowerCase() != '/login/login'){
-    //res.send(urlpath.pathname.toLowerCase());
-    if(!req.session.uid){
-      res.redirect(301,'/Login/login');
-    }
-  }
+  // if(urlpath.pathname.toLowerCase() != '/login/login'){
+  //   //res.send(urlpath.pathname.toLowerCase());
+  //   if(!req.session.uid){
+  //     res.redirect(301,'/Login/login');
+  //   }
+  // }
   next();
 });
 
@@ -75,7 +75,7 @@ app.use('/Login',Login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('404 Not Found NIMEIMEIDE');
+  var err = new Error('404 Not Found 我们现在还没有这个页面');
   err.status = 404;
   next(err);
 });

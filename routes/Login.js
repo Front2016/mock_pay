@@ -37,4 +37,43 @@ router.route("/login").get(function(req,res){    // 到达此路径则渲染logi
         }
     });
 });
+router.route('/submit').get(function(req,res){
+    var urlparam = url.parse(req.url,true).query;
+    res.set({
+        'Content-Type':'text/plain',
+        'Content-Length':'123',
+        'ETag':'12345'
+    });
+    res.cookie('cart',{items:[1,2,3]});
+    if(urlparam.name && urlparam.password){
+        connection.query('SELECT id,password from user where name = "'+urlparam.name+'" ', function (err, rows, fields) {
+            if (err) throw err;
+            if(rows.length > 0){
+                if(rows[0]['password'] == urlparam.password){
+                    req.session.uid = rows[0]['id'];
+                    console.log(req.session.uid);
+                    res.send({
+                        'res': 'success',
+                        'name': urlparam.name,
+                        'password': urlparam.password
+                    });
+                }else{
+                    res.send({
+                        'res':'error',
+                        'error-msg':'密码不正确'
+                    })
+                }
+            }else{
+                res.send({
+                    'res':'error',
+                    'error-msg':'没有该用户'
+                })
+            }
+        })
+    }else{
+        res.send({
+            'res': '密码用户名不能为空',
+        });
+    }
+})
 module.exports = router;

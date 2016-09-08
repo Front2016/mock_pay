@@ -1,0 +1,43 @@
+.page-login{
+    width:100%;
+    h1,p{
+        text-align: center;
+        position: relative;
+        margin-top: 60px;
+    }
+    p{
+        font-size: 30px;
+    }
+    .user{
+        margin-top: 50px!important;
+    }
+    .flex{
+        margin-top: 18px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: flex-start;
+        font-size: 30px;
+        label{
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+        }
+        input{
+            display: block;
+            height: 40px;
+            text-indent: 10px;
+        }
+    }
+    .loginflex{
+        margin-top: 4px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: flex-start;
+        margin-top: 40px;
+        .button{
+            width: 200px;
+        }
+    }
+}

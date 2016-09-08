@@ -28,10 +28,10 @@ var jade = require('gulp-jade');
 var basedir = './';
 var publicdir = './public';
 var filepath = {
-  'css': path.join(publicdir, 'css/**/*.css'),
-  'scss': path.join(basedir, 'sass/**/*.scss'),
-  'js': path.join(publicdir, 'js/**/*.js'),
-  'view': path.join(basedir, 'views/**/*.jade')
+  //'css': path.join(publicdir, 'css/**/*.css'),
+  'scss': path.join(basedir, 'src/**/*.scss'),
+  //'js': path.join(publicdir, 'src/**/*.js'),
+  //'view': path.join(basedir, 'src/**/*.jade')
 };
 
 // 编译 scss
@@ -168,5 +168,9 @@ gulp.task('watch', function () {
 gulp.task('dev', ['dev:server', 'css', 'transScss', 'transJade', 'webpack', 'watch']);
 gulp.task('api', ['api:server', 'css', 'watch']);
 
-gulp.task('compile',['webpack','dev:server','transScss']);
+gulp.task('watchcss', function(){
+  gulp.watch(filepath.scss,['transScss']);
+})
+
+gulp.task('compile',['webpack','dev:server','watchcss']);
 
